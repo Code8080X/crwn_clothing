@@ -1,48 +1,37 @@
 // import logo from './logo.svg';
-import CategoryItem from './Components/CategoryItem/category-item.component';
-import './categories.styles.css';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import Home from './routes/home/home.component';
+import Nav from './routes/navigation/nav.component';
+// import './routes/navigation/navigation.styles.scss';
+
+const Shop = () => {
+  return (
+  <div>
+    <p>This is the shop page</p>
+    <Outlet />
+  </div>
+  );
+}
+
+const SubShop = () => {
+  return (
+  <div>
+    <p>2 This is the sub shop page</p>
+  </div>
+  );
+}
+ 
 
 const App = () => {
-
-  const categories = [
-    {
-      "id": 1,
-      "title": "hats",
-      "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
-    },
-    {
-      "id": 2,
-      "title": "jackets",
-      "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
-    },
-    {
-      "id": 3,
-      "title": "sneakers",
-      "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
-    },
-    {
-      "id": 4,
-      "title": "womens",
-      "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
-    },
-    {
-      "id": 5,
-      "title": "mens",
-      "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
-    }
-  ]
-
   return (
-    <div className="container categories-container">
-
-      {categories.map((category) => (
-      <div key={category.id} className="category-container col-md-4">
-        {/* <img alt={category.title} src={category.imageUrl} style={{backgroundImage: `url(${category.imageUrl})`}}></img> */}
-          <CategoryItem category={category}/>
-      </div>
-      ))}
-      
-    </div>
+    <Routes>
+      <Route path='/' element={<Nav />}>
+        <Route index element={<Home />}/>
+        <Route path='shop' element={<Shop />}>
+          <Route path='subshop' element={<SubShop />}/>
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 
